@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "35e379a4-f936-4fce-bd48-9a0eb001246b",
+		"name": "CHECKOUT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19674577"
+	},
+	"item": [
+		{
+			"name": "CREATE CHECKOUT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"customer\": {\r\n            \"accountId\": \"1\",\r\n            \"avatar\": \"http://res.cloudinary.com/diigkcc6g/image/upload/v1659177973/Pet%20Shop%20e-Commerce/customer/avatar/img/rjullirsuwpdya8h2i6h.jpg\",\r\n            \"firstName\": \"Kolya Nikolai\",\r\n            \"lastName\": \"Madridano\",\r\n            \"contactNo\": \"09759458371\",\r\n            \"address\": \"Xavier Estates Phase 4\"\r\n        },\r\n        \"merchant\": {\r\n            \"accountId\": \"2\",\r\n            \"avatar\": \"http://res.cloudinary.com/diigkcc6g/image/upload/v1659177973/Pet%20Shop%20e-Commerce/customer/avatar/img/rjullirsuwpdya8h2i6h.jpg\",\r\n            \"name\": \"Historia Reiss Store\",\r\n            \"contactNo\": \"09759458371\",\r\n            \"address\": \"Eldia Chiba, Japan\"\r\n        }\r\n    },\r\n    \"content\": {\r\n        \"items\": [\r\n            {\r\n                \"_id\": \"22da1d8590ca599bcc8303S7a\",\r\n                \"images\": [\r\n                    \"https://sample.img/1\",\r\n                    \"https://sample.img/2\"\r\n                ],\r\n                \"qty\": 4,\r\n                \"price\": \"35\"\r\n            },\r\n            {\r\n                \"_id\": \"12da1d8590ca599bcc8303S7a\",\r\n                \"images\": [\r\n                    \"https://sample.img/1\",\r\n                    \"https://sample.img/2\"\r\n                ],\r\n                \"qty\": 6,\r\n                \"price\": \"35\"\r\n            }\r\n        ],\r\n        \"total\": 5000\r\n    },\r\n    \"status\": \"delivered\",\r\n    \"estimatedDeliveryDateAndTime\": \"Aug 1, 2022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/checkout",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET CUSTOMER CHECKOUTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/checkout/get-by-customers?accountId=1&status=to-pack",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"checkout",
+						"get-by-customers"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "1"
+						},
+						{
+							"key": "status",
+							"value": "to-pack"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET MERCHANT CHECKOUTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n\r\n    },\r\n    \"content\": {\r\n\r\n    },\r\n    \"status\": \"pending\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/checkout/get-by-merchants?accountId=2&status=delivered",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"checkout",
+						"get-by-merchants"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "2"
+						},
+						{
+							"key": "status",
+							"value": "delivered"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE CHECKOUT STATUS",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refNumber\": \"1A08C09C-EAA7-46F1-A064-E5C026AAA74C\",\r\n    \"status\": \"delivered\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/checkout",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

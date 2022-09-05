@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "d81b0601-5cbc-43d1-b5e5-509ba2533b68",
+		"name": "STATISTICS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19674577"
+	},
+	"item": [
+		{
+			"name": "MERCHANT",
+			"item": [
+				{
+					"name": "SALES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/statistics/merchant/sales?accountId=2&start=2022-07-20T12:08:29.742Z",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"merchant",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "2"
+								},
+								{
+									"key": "start",
+									"value": "2022-07-20T12:08:29.742Z"
+								},
+								{
+									"key": "end",
+									"value": "2022-07-30T15:08:29.742Z",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CUSTOMER",
+			"item": [
+				{
+					"name": "EXPENSES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/statistics/customer/sales?accountId=2&start=2022-07-20T12:08:29.742Z",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"customer",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "2"
+								},
+								{
+									"key": "start",
+									"value": "2022-07-20T12:08:29.742Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

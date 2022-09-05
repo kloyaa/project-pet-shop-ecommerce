@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "504c566c-bc55-4f5d-bf67-e7d81864870d",
+		"name": "PRODUCT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19674577"
+	},
+	"item": [
+		{
+			"name": "CREATE PRODUCT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountId\": \"rfea2e9fe8e253fd77260dp\",\r\n    \"title\": \"Historia's Product\",\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat\",\r\n    \"images\": [\r\n        \"https://res.cloudinary.com/diigkcc6g/image/upload/v1659178914/Pet%20Shop%20e-Commerce/merchant/products/Historia%20Store/ulvbpnke17ytffrwrzs0.jpg\",\r\n        \"https://res.cloudinary.com/diigkcc6g/image/upload/v1659178914/Pet%20Shop%20e-Commerce/merchant/products/Historia%20Store/ulvbpnke17ytffrwrzs0.jpg\",\r\n        \"https://res.cloudinary.com/diigkcc6g/image/upload/v1659178914/Pet%20Shop%20e-Commerce/merchant/products/Historia%20Store/ulvbpnke17ytffrwrzs0.jpg\"\r\n    ],\r\n    \"price\": \"50\",\r\n    \"stocksQuantity\": 999,\r\n    \"availability\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/product",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD PRODUCT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"type": "file",
+							"src": "/C:/Users/Administrator/Pictures/3a3e8cbbc00cb64375a175e81f7572eb.jpg"
+						},
+						{
+							"key": "merchantName",
+							"value": "Historia Store",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/product/upload",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PRODUCTS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/product/all",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PRODUCTS BY MERCHANT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/product/?accountId=rfea2e9fe8e253fd77260dp&availability=true",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "rfea2e9fe8e253fd77260dp"
+						},
+						{
+							"key": "availability",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE PRODUCT",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/product/62e5108ec4be8cd4993cd8de",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						"62e5108ec4be8cd4993cd8de"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

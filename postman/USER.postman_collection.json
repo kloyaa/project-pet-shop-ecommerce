@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "bd025d3a-e135-4396-b524-f04b88c0f749",
+		"name": "USER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19674577"
+	},
+	"item": [
+		{
+			"name": "REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sample@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/user/register",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sample@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-petshop-ecommerce.herokuapp.com/api/user/login",
+					"protocol": "https",
+					"host": [
+						"api-petshop-ecommerce",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

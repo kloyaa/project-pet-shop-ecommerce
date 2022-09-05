@@ -1,0 +1,826 @@
+{
+	"info": {
+		"_postman_id": "86bc10d5-a52d-4958-aa99-0e14eaaf399f",
+		"name": "PROFILE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19674577"
+	},
+	"item": [
+		{
+			"name": "RIDER",
+			"item": [
+				{
+					"name": "CREATE PROFILE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjJkNTgxMTNhMzk0ZTZmYTBmYThjM2RkIiwiaWF0IjoxNjU4MTYyNzM3LCJleHAiOjE2NTgxNjk5Mzd9.aB34jfvEgeYQZZUFNndCRQSj42NsqMr17txH3eza2vAss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Jin\",\r\n        \"last\": \"Kazama\"\r\n    },\r\n    \"address\": {\r\n        \"coordinates\": {\r\n            \"latitude\": \"8.433692562824382\",\r\n            \"longitude\": \"124.61838386036918\"\r\n        },\r\n        \"name\": \"Xavier Estates Phase 4\"\r\n    },\r\n    \"contact\": {\r\n        \"email\": \"madridano.kolya@gmail.com\",\r\n        \"number\": \"09277522772\"\r\n    },\r\n    \"date\": {\r\n        \"createdAt\": \"2022-07-20T13:04:58.245Z\",\r\n        \"updatedAt\": \"2022-07-20T14:23:27.218Z\"\r\n    },\r\n    \"accountId\": \"rfea2e9fe8e253fd77260dp\",\r\n    \"visibility\": true,\r\n    \"verified\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL PROFILES",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider"
+							],
+							"query": [
+								{
+									"key": "visibility",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "accountType",
+									"value": "merchanthttp://localhost:5000",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET SINGLE PROFILE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"Sx3fea2e9fe8e253fd77260f\",\r\n    \"accountType\": \"customer\",\r\n    \"img\": {\r\n        \"avatar\": \"https://avatar.io/Sx3fea2e9fe8e253fd77260f\"\r\n    },\r\n    \"firstName\": \"Kolya\",\r\n    \"lastName\": \"Madridano\",\r\n    \"verified\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/profile/rider/rfea2e9fe8e253fd77260dphttps://api-petshop-ecommerce.herokuapp.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"profile",
+								"rider",
+								"rfea2e9fe8e253fd77260dphttps:",
+								"",
+								"api-petshop-ecommerce.herokuapp.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BASIC INFO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"rfea2e9fe8e253fd77260dp\",\r\n    \"firstName\": \"Eren\",\r\n    \"lastName\": \"Jaeger\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ADDRESS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"rfea2e9fe8e253fd77260dp\",\r\n    \"name\": \"Eldia, Chiba, Japan\",\r\n    \"latitude\": \"35.634454734016934\",\r\n    \"longitude\": \"140.20667514496245\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider/address",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CONTACT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"rfea2e9fe8e253fd77260dp\",\r\n    \"email\": \"jaeger.eren@gmail.com\",\r\n    \"number\": \"09123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider/contact",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE AVATAR",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accountId",
+									"value": "rfea2e9fe8e253fd77260dp",
+									"type": "text"
+								},
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/Administrator/Pictures/tumblr_8f501fc3a77e1c8344351b0dbd41e1c7_6826b1a6_400.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider/avatar",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PROFILE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"SxKolya\",\r\n    \"lastName\": \"SxMadridano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/rider/xfea2e9fe8e253fd77260d",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"rider",
+								"xfea2e9fe8e253fd77260d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MERCHANT",
+			"item": [
+				{
+					"name": "CREATE PROFILE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"f2a2e9fe8e253fd77260d1f\",\r\n    \"avatar\": \"https://sample.img.io/f2a2e9fe8e253fd77260d1f\",\r\n    \"name\": \"Manolo Fortitch Store\",\r\n    \"contact\": {\r\n        \"email\": \"madridano.kolya@gmail.com\",\r\n        \"number\": \"09277522772\"\r\n    },\r\n    \"address\": {\r\n        \"name\": \"Xavier Estates Phase 4\",\r\n        \"coordinates\": {\r\n            \"longitude\": \"124.91026597350766\",\r\n            \"latitude\": \"8.388748404279287\"\r\n        }\r\n    },\r\n    \"verified\": true,\r\n    \"visibility\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL PROFILES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant?latitude=8.482084374618022&longitude=124.6361415289093&sortBy=desc",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "8.482084374618022"
+								},
+								{
+									"key": "longitude",
+									"value": "124.6361415289093"
+								},
+								{
+									"key": "sortBy",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  SINGLE PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/fea2e9fe8e253fd77260d1f",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"fea2e9fe8e253fd77260d1f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BASIC INFO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"fea2e9fe8e253fd77260d1f\",\r\n    \"name\": \"Illigan E-Commerce Store\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ADDRESS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"fea2e9fe8e253fd77260d1f\",\r\n    \"name\": \"Illigan City\",\r\n    \"latitude\": \"8.222412881081768\",\r\n    \"longitude\": \"124.2389103299377\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/address",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CONTACT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"fea2e9fe8e253fd77260d1f\",\r\n    \"email\": \"shop.illigan@gmail.com\",\r\n    \"number\": \"099912345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/contact",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE DELIVERY FEE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"fea2e9fe8e253fd77260d1f\",\r\n    \"feePerKilometer\": \"255\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/delivery-fee",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"delivery-fee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE RIDER STATUS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"fea2e9fe8e253fd77260d1f\",\r\n    \"riderStatus\": \"inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/rider-status",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"rider-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE AVATAR",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accountId",
+									"value": "fea2e9fe8e253fd77260d1f",
+									"type": "text"
+								},
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/Administrator/Pictures/tumblr_8f501fc3a77e1c8344351b0dbd41e1c7_6826b1a6_400.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/merchant/avatar",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"merchant",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CUSTOMER",
+			"item": [
+				{
+					"name": "CREATE PROFILE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"32a2e9fe8e253fd77260d12b\",\r\n    \"name\": {\r\n        \"first\": \"Kolya\",\r\n        \"last\": \"Madridano\"\r\n    },\r\n    \"contact\": {\r\n        \"email\": \"madridano.kolya@gmail.com\",\r\n        \"number\": \"09277522772\"\r\n    },\r\n    \"address\": {\r\n        \"name\": \"Xavier Estates Phase 4\",\r\n        \"coordinates\": {\r\n            \"longitude\": \"123.88425306575986\",\r\n            \"latitude\": \"10.313220187410511\"\r\n        }\r\n    },\r\n    \"verified\": true,\r\n    \"visibility\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL PROFILES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "8.482084374618022",
+									"disabled": true
+								},
+								{
+									"key": "longitude",
+									"value": "124.6361415289093",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  SINGLE PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer/32a2e9fe8e253fd77260d12b",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer",
+								"32a2e9fe8e253fd77260d12b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE BASIC INFO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"32a2e9fe8e253fd77260d12b\",\r\n    \"firstName\": \"Kolya Nikolai\",\r\n    \"lastName\": \"Madridano\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ADDRESS",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"32a2e9fe8e253fd77260d12b\",\r\n    \"name\": \"Cebu City, Philippines\",\r\n    \"latitude\": \"10.313220187410511\",\r\n    \"longitude\": \"123.88425306575986\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer/address",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CONTACT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountId\": \"32a2e9fe8e253fd77260d12b\",\r\n    \"email\": \"madridano@kolya.com\",\r\n    \"number\": \"09759458371\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer/contact",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE AVATAR",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accountId",
+									"value": "32a2e9fe8e253fd77260d12b",
+									"type": "text"
+								},
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/Administrator/Pictures/Kolya Avatar.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-petshop-ecommerce.herokuapp.com/api/profile/customer/avatar",
+							"protocol": "https",
+							"host": [
+								"api-petshop-ecommerce",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"profile",
+								"customer",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,16 @@
+flow.txt
+credentials.txt
+index.html
+node_modules
+.env
+_controllers
+_models
+_routes
+android
+ios
+lib
+build
+.dart_tool
+windows
+.flutter-plugins-dependencies
+.flutter-plugins
