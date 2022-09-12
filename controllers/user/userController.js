@@ -15,7 +15,10 @@ const createUser = async (req, res) => {
             .then(async (hashValue) => {
                 new User({ email, hashValue })
                     .save()
-                    .then((value) => res.status(200).json({ accountId: value._id, email, password: hashValue }))
+                    .then((value) => res.status(200).json({
+                        accountId: value._id,
+                        email, password: hashValue
+                    }))
                     .catch((err) => res.status(400).send(err));
             });
     } catch (error) {
@@ -27,20 +30,20 @@ const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user) 
+        if (!user)
             return res.status(400).json({ message: "Account doesn't exist" });
 
         await bcrypt.compare(password, user.hashValue)
             .then((value) => {
                 if (value == false)
                     return res.status(400).json({ message: "Invalid login" });
-                    
+
                 const accessToken = jwt.sign(
-                  { data: user._id.toString()},
-                  process.env.ACCESS_TOKEN_SECRET,
-                  { expiresIn: "2h" }
+                    { data: user._id.toString() },
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: "2h" }
                 );
-                
+
                 return res.status(200).json({
                     accountId: user._id,
                     email: user.email,
@@ -53,8 +56,8 @@ const loginUser = async (req, res) => {
     }
 }
 module.exports = {
-  createUser,
-  loginUser
+    createUser,
+    loginUser
 };
 
 

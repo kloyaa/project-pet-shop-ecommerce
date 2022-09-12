@@ -6,56 +6,11 @@ const { checkoutStatus } = require("../const/enum");
 const CheckoutSchema = new Schema({
   transactionId: {
     type: String,
+    required: [true, "transactionId is required"]
   },
   header: {
-    customer: {
-      accountId: {
-        type: String,
-        required: [true, "customer accountId is required"],
-      },
-      avatar: {
-        type: String,
-        required: [true, "customer img is required"],
-      },
-      firstName: {
-        type: String,
-        required: [true, "customer firstName is required"],
-      },
-      lastName: {
-        type: String,
-        required: [true, "customer lastName is required"],
-      },
-      contactNo: {
-        type: String,
-        required: [true, "customer contactNo is required"],
-      },
-      address: {
-        type: String,
-        required: [true, "customer address is required"],
-      },
-    },
-    merchant: {
-      accountId: {
-        type: String,
-        required: [true, "merchant accountId is required"],
-      },
-      avatar: {
-        type: String,
-        required: [true, "merchant img is required"],
-      },
-      name: {
-        type: String,
-        required: [true, "merchant name is required"],
-      },
-      contactNo: {
-        type: String,
-        required: [true, "merchant contactNo is required"],
-      },
-      address: {
-        type: String,
-        required: [true, "merchant address is required"],
-      },
-    },
+    customer: {},
+    merchant: {},
   },
   content: {
     items: [],
@@ -79,7 +34,7 @@ const CheckoutSchema = new Schema({
     enum: checkoutStatus,
   },
   deliveryFee: {
-    type: String,
+    type: Number,
     required: [true, "deliveryFee is required"],
   },
   estimatedDeliveryDateAndTime: {

@@ -3,7 +3,7 @@ const cloudinary = require("../../services/img-upload/cloundinary");
 
 const createProfile = async (req, res) => {
   try {
-    const accountId = req.body.accountId;
+    const accountId = req.body.accountId; // QR CODE
     const doesExist = await Rider.findOne({ accountId });
     if (doesExist)
       return res.status(400).json({ message: "accountId already exist" });
@@ -16,6 +16,7 @@ const createProfile = async (req, res) => {
     console.error(error);
   }
 };
+
 const getAllProfiles = async (req, res) => {
   try {
     return Rider.find({})

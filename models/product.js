@@ -32,7 +32,7 @@ const ProductSchema = new Schema({
     },
   },
   price: {
-    type: String,
+    type: Number,
     required: [true, "price is required"],
   },
   date: {
@@ -43,10 +43,6 @@ const ProductSchema = new Schema({
     updatedAt: {
       type: Date,
     },
-  },
-  stocksQuantity: {
-    type: String,
-    required: [true, "stocksQuantity is required"],
   },
   availability: {
     type: Boolean,

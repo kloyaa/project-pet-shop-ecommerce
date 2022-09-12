@@ -42,6 +42,7 @@ const getAllProfiles = async (req, res) => {
                 "K"
               ).toFixed(1),
             };
+
             return data;
           })
           .sort((a, b) => {

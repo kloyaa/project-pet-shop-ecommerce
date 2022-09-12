@@ -16,6 +16,8 @@ const createProfile = async (req, res) => {
     console.error(error);
   }
 };
+
+
 const getAllProfiles = async (req, res) => {
   try {
     return Customer.find({})

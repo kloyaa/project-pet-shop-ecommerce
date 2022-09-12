@@ -1,32 +1,70 @@
-const Checkout = require("../../models/checkout");
 const { v4: uuidv4 } = require("uuid");
+const { Customer, Merchant } = require("../../models/profile");
+const Checkout = require("../../models/checkout");
+const Product = require("../../models/product");
+const Monetization = require("../../models/monetization");
 
 const MONETIZATION_PERCENT = 0.05;
 
 const createCheckout = async (req, res) => {
   try {
-    const { content } = req.body;
+    const {
+      customerAccountId,
+      merchantAccountId,
+      products,
+      deliveryFee,
+      estimatedDeliveryDateAndTime,
+      status
+    } = req.body;
+
     const transactionId = uuidv4();
 
-    const monetizationBody = {
-      transactionId,
-      amount: parseInt(content.total) * MONETIZATION_PERCENT,
+
+    let productsArray = [];
+    let productsSubTotal = 0;
+
+    const customer = await Customer
+      .findOne({ accountId: customerAccountId })
+      .select({ __v: 0, _id: 0 });
+
+    const merchant = await Merchant
+      .findOne({ accountId: merchantAccountId })
+      .select({ __v: 0, _id: 0 });
+
+    for (let value of products) {
+      const product = await Product
+        .findById(value)
+        .select({ __v: 0, address: 0 });
+      productsSubTotal += product.price;
+      productsArray.push(product);
     }
 
-    req.body.transactionId = transactionId;
+    let payload = {
+      transactionId,
+      header: {
+        customer,
+        merchant,
+      },
+      content: {
+        items: productsArray,
+        total: productsSubTotal
+      },
+      deliveryFee,
+      estimatedDeliveryDateAndTime,
+      status
+    }
 
-    const createTxnMonetization = await TxnMonetization(monetizationBody).save();
-    const createCheckout = await Checkout(req.body).save();
-    return res.status(200).json({
-      checkount: createCheckout,
-      monetization: createTxnMonetization
-    });
+    return new Checkout(payload)
+      .save()
+      .then((value) => res.status(200).json(value))
+      .catch((err) => res.status(400).json(err.errors));
+
   } catch (error) {
     console.error(error);
   }
 };
 
-const getCheckouts = async (req, res) => {
+const customerCheckouts = async (req, res) => {
   try {
     const { accountId, status } = req.query;
 
@@ -57,7 +95,6 @@ const getByTxnId = async (req, res) => {
 
 const merchantCheckouts = async (req, res) => {
   const { accountId, status } = req.query;
-
   return Checkout.find({ "header.merchant.accountId": accountId, status })
     .sort({ "date.createdAt": "asc" }) // filter by date
     .select({ __v: 0 }) // Do not return _id and __v
@@ -66,24 +103,26 @@ const merchantCheckouts = async (req, res) => {
 };
 
 const updateCheckoutStatus = async (req, res) => {
-  const { refNumber, status } = req.body;
+  const { transactionId, status } = req.body;
   try {
-    Checkout.findOneAndUpdate(
-      { refNumber },
-      {
-        $set: {
-          status,
-          "date.updatedAt": Date.now(),
-        },
-      },
-      { runValidators: true, new: true }
-    )
-      .then((value) => {
-        if (!value)
-          return res.status(400).json({ message: "refNumber not found" });
-        return res.status(200).json(value);
-      })
-      .catch((err) => res.status(400).json(err));
+    const query = { transactionId };
+    const update = { $set: { status, "date.updatedAt": Date.now() } };
+    const options = { runValidators: true, new: true };
+    let monetization;
+
+    const checkout = await Checkout.findOneAndUpdate(query, update, options);
+    if (checkout === null) return res
+      .status(400)
+      .json({ message: "Checkout not found" });
+
+    if (status === "delivered") {
+      monetization = await Monetization({
+        transactionId,
+        amount: checkout.content.total * MONETIZATION_PERCENT,
+      }).save();
+    }
+
+    return res.status(200).json({ checkout, monetization });
   } catch (error) {
     console.error(error);
   }
@@ -105,7 +144,7 @@ const deleteCheckout = async (req, res) => {
 
 module.exports = {
   createCheckout,
-  getCheckouts,
+  customerCheckouts,
   merchantCheckouts,
   getByTxnId,
   updateCheckoutStatus,

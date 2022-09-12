@@ -129,7 +129,7 @@ const MerchantProfileSchema = new Schema({
     required: [true, "riderStatus is required"],
   },
   // OPTIONAL
-  feePerKilometer: { type: String },
+  feePerKilometer: { type: Number },
 });
 
 const RiderProfileSchema = new Schema({

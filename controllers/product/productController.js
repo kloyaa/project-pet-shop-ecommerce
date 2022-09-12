@@ -12,7 +12,7 @@ const uploadProductImages = async (req, res) => {
   };
   const uploadedImg = await cloudinary.uploader.upload(filePath, options);
 
-  return res.status(200).json(uploadedImg);
+  return res.status(200).json({ url: uploadedImg.url });
 };
 
 const createProduct = async (req, res) => {
@@ -45,40 +45,15 @@ const getProducts = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const { keyword, latitude, longitude, sortBy } = req.query;
-
     if (latitude == undefined || longitude == undefined)
       return res.status(400).json({ message: "Invalid coordinates" })
 
-    if (keyword == null || keyword === "" || keyword == undefined) {
-      return Product.find({})
-        .sort({ _id: -1 })
-        .then((value) => {
+    const isNotSearching = keyword == null || keyword === "" || keyword == undefined;
+    const query = isNotSearching ? {} : { title: { $regex: keyword, $options: "i" } };
 
-          const result = value
-            .map((element, _) => {
-              const fromLat = element.address.coordinates.latitude;
-              const fromLon = element.address.coordinates.longitude;
-              return {
-                ...element._doc,
-                distanceBetween: distanceBetween(fromLat, fromLon, latitude, longitude, "K").toFixed(1) + "km"
-              };
-            })
-            .sort((a, b) => {
-              const value1 = parseFloat(a.distanceBetween.replace(/[^\d.-]/g, ''));
-              const value2 = parseFloat(b.distanceBetween.replace(/[^\d.-]/g, ''));
-
-              console.log(value1, value2)
-              if (sortBy == "desc") return value2 - value1;
-              return value1 - value2;
-            });
-
-          return res.status(200).json(result);
-        })
-        .catch((err) => res.status(400).json(err));
-    }
-
-    return Product.find({ title: { $regex: keyword, $options: "i" } })
+    return Product.find(query)
       .sort({ _id: -1 })
+      .select({ __v: 0 })
       .then((value) => {
         const result = value
           .map((element, _) => {
@@ -95,7 +70,6 @@ const getAllProducts = async (req, res) => {
             if (sortBy == "desc") return value2 - value1;
             return value1 - value2;
           });
-
         return res.status(200).json(result);
       })
       .catch((err) => res.status(400).json(err));
