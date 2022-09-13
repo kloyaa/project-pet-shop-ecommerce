@@ -21,7 +21,7 @@ const createCheckout = async (req, res) => {
 
 
     let productsArray = [];
-    let productsSubTotal = 0;
+    let orderSubTotal = 0;
 
     const customer = await Customer
       .findOne({ accountId: customerAccountId })
@@ -32,13 +32,16 @@ const createCheckout = async (req, res) => {
       .select({ __v: 0, _id: 0 });
 
     for (let value of products) {
-      console.log(value._id, value.qty);
 
       const product = await Product
         .findById(value._id)
         .select({ __v: 0, address: 0 });
-      productsSubTotal += product.price;
-      productsArray.push({ ...product, qty: value.qty });
+
+      orderSubTotal += product.price;
+
+      const quantity = value.qty;
+      const subTotal = quantity * product.price;
+      productsArray.push({ ...product._doc, quantity, subTotal });
     }
 
     let payload = {
@@ -49,7 +52,7 @@ const createCheckout = async (req, res) => {
       },
       content: {
         items: productsArray,
-        total: productsSubTotal
+        total: orderSubTotal
       },
       deliveryFee,
       estimatedDeliveryDateAndTime,
