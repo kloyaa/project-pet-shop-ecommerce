@@ -32,6 +32,8 @@ const createCheckout = async (req, res) => {
       .select({ __v: 0, _id: 0 });
 
     for (let value of products) {
+      console.log(value._id, value.qty);
+
       const product = await Product
         .findById(value._id)
         .select({ __v: 0, address: 0 });
