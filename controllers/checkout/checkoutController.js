@@ -37,10 +37,11 @@ const createCheckout = async (req, res) => {
         .findById(value._id)
         .select({ __v: 0, address: 0 });
 
-      orderSubTotal += product.price;
 
       const quantity = value.qty;
       const subTotal = quantity * product.price;
+      orderSubTotal += subTotal;
+
       productsArray.push({ ...product._doc, quantity, subTotal });
     }
 
