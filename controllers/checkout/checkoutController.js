@@ -33,10 +33,10 @@ const createCheckout = async (req, res) => {
 
     for (let value of products) {
       const product = await Product
-        .findById(value)
+        .findById(value._id)
         .select({ __v: 0, address: 0 });
       productsSubTotal += product.price;
-      productsArray.push(product);
+      productsArray.push({ ...product, qty: value.qty });
     }
 
     let payload = {
