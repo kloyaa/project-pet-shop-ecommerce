@@ -35,6 +35,7 @@ const getProducts = async (req, res) => {
         .sort({ _id: -1 })
         .then((value) => res.status(200).json(value))
         .catch((err) => res.status(400).json(err));
+
       return Product.find({ accountId, availability })
         .sort({ _id: -1 })
         .then((value) => res.status(200).json(value))
@@ -83,6 +84,23 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const productAvailability = async (req, res) => {
+  try {
+    const { _id, availability } = req.body;
+
+    Product.findByIdAndUpdate(_id, { availability }, { new: true })
+      .then((value) => {
+        if (!value)
+          return res.status(400).json({ message: "Product not found" });
+        return res.status(200).json(value);
+      })
+      .catch((err) => res.status(400).json(err));
+  } catch (error) {
+    console.log(error);
+
+  }
+}
+
 const deleteProduct = async (req, res) => {
   try {
     const id = req.params.id;
@@ -102,5 +120,6 @@ module.exports = {
   uploadProductImages,
   getProducts,
   getAllProducts,
+  productAvailability,
   deleteProduct,
 };
