@@ -55,7 +55,7 @@ const getAllProducts = async (req, res) => {
       return res.status(400).json({ message: "Invalid coordinates" })
 
     const isNotSearching = keyword == null || keyword === "" || keyword == undefined;
-    const query = isNotSearching ? {} : { title: { $regex: keyword, $options: "i" } };
+    const query = isNotSearching ? { availability: true } : { title: { $regex: keyword, $options: "i" }, availability: true };
 
     return Product.find(query)
       .sort({ _id: -1 })
