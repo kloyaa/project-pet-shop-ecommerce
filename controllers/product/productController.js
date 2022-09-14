@@ -28,8 +28,13 @@ const createProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
   try {
-    const { accountId, availability } = req.query;
+
     try {
+      const { accountId, availability } = req.query;
+      if (availability === undefined) return Product.find({ accountId })
+        .sort({ _id: -1 })
+        .then((value) => res.status(200).json(value))
+        .catch((err) => res.status(400).json(err));
       return Product.find({ accountId, availability })
         .sort({ _id: -1 })
         .then((value) => res.status(200).json(value))

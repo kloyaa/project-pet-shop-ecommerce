@@ -41,7 +41,6 @@ const createCheckout = async (req, res) => {
       const quantity = value.qty;
       const subTotal = quantity * product.price;
       orderSubTotal += subTotal;
-
       productsArray.push({ ...product._doc, quantity, subTotal });
     }
 
