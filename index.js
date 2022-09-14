@@ -3,6 +3,7 @@ const port = process.env.PORT || 5000;
 const express = require("express");
 const multer = require("multer");
 const mongoose = require("mongoose");
+const cors = require('cors')
 const app = express();
 
 const { fileFilter, storage } = require("./services/img-upload/fileFilter");
@@ -13,6 +14,7 @@ try {
     .then((value) => console.log("SERVER IS CONNECTED"))
     .catch(() => console.log("SERVER CANNOT CONNECT"));
 
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(multer({ storage, fileFilter }).single("img"));
