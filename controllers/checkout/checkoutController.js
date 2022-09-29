@@ -114,21 +114,24 @@ const updateCheckoutStatus = async (req, res) => {
     const options = { runValidators: true, new: true };
     let monetization;
 
-    const isValid = await Checkout.findOne({ transactionId });
-    return res.status(200).json(isValid);
-    // const checkout = await Checkout.findOneAndUpdate(query, update, options);
-    // if (checkout === null) return res
-    //   .status(400)
-    //   .json({ message: "Checkout not found" });
+    const { status } = await Checkout.findOne({ transactionId });
 
-    // if (status === "delivered") {
-    //   monetization = await Monetization({
-    //     transactionId,
-    //     amount: checkout.content.total * MONETIZATION_PERCENT,
-    //   }).save();
-    // }
+    if (status === "delivered")
+      return res.status(400).json({ message: "Order not found" });
 
-    // return res.status(200).json({ checkout, monetization });
+    const checkout = await Checkout.findOneAndUpdate(query, update, options);
+    if (checkout === null) return res
+      .status(400)
+      .json({ message: "Order not found" });
+
+    if (status === "delivered") {
+      monetization = await Monetization({
+        transactionId,
+        amount: checkout.content.total * MONETIZATION_PERCENT,
+      }).save();
+    }
+
+    return res.status(200).json({ checkout, monetization });
   } catch (error) {
     console.error(error);
   }
