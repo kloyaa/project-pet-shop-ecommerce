@@ -114,9 +114,9 @@ const updateCheckoutStatus = async (req, res) => {
     const options = { runValidators: true, new: true };
     let monetization;
 
-    const { status } = await Checkout.findOne({ transactionId });
+    const validateCheckout = await Checkout.findOne({ transactionId });
 
-    if (status === "delivered")
+    if (validateCheckout.status === "delivered")
       return res.status(400).json({ message: "Order not found" });
 
     const checkout = await Checkout.findOneAndUpdate(query, update, options);
