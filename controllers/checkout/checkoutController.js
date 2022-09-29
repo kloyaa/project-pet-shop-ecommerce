@@ -115,7 +115,7 @@ const updateCheckoutStatus = async (req, res) => {
     let monetization;
 
     const isValid = await Checkout.findOne({ transactionId });
-    return res.status(isValid);
+    return res.status(200).json(isValid);
     // const checkout = await Checkout.findOneAndUpdate(query, update, options);
     // if (checkout === null) return res
     //   .status(400)
