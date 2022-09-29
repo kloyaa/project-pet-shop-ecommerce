@@ -87,7 +87,6 @@ const getByTxnId = async (req, res) => {
   try {
     const transactionId = req.params.id;
     return Checkout.findOne({ transactionId })
-      .sort({ "date.createdAt": "desc" }) // filter by date
       .select({ __v: 0 }) // Do not return _id and __v
       .then((value) => {
         if (!value) return res.status(400).json({ message: "Transaction not found" });
@@ -115,19 +114,22 @@ const updateCheckoutStatus = async (req, res) => {
     const options = { runValidators: true, new: true };
     let monetization;
 
-    const checkout = await Checkout.findOneAndUpdate(query, update, options);
-    if (checkout === null) return res
-      .status(400)
-      .json({ message: "Checkout not found" });
+    const isValid = await Checkout.findOne({ transactionId });
 
-    if (status === "delivered") {
-      monetization = await Monetization({
-        transactionId,
-        amount: checkout.content.total * MONETIZATION_PERCENT,
-      }).save();
-    }
+    console.log(isValid)
+    // const checkout = await Checkout.findOneAndUpdate(query, update, options);
+    // if (checkout === null) return res
+    //   .status(400)
+    //   .json({ message: "Checkout not found" });
 
-    return res.status(200).json({ checkout, monetization });
+    // if (status === "delivered") {
+    //   monetization = await Monetization({
+    //     transactionId,
+    //     amount: checkout.content.total * MONETIZATION_PERCENT,
+    //   }).save();
+    // }
+
+    // return res.status(200).json({ checkout, monetization });
   } catch (error) {
     console.error(error);
   }
