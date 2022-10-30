@@ -59,11 +59,11 @@ const CustomerProfileSchema = new Schema({
   },
   visibility: {
     type: Boolean,
-    required: [true, "visibility is required"],
+    default: false,
   },
   verified: {
     type: Boolean,
-    required: [true, "verified status is required"],
+    default: false,
   },
 });
 
@@ -114,11 +114,11 @@ const MerchantProfileSchema = new Schema({
   },
   visibility: {
     type: Boolean,
-    required: [true, "visibility is required"],
+    default: false,
   },
   verified: {
     type: Boolean,
-    required: [true, "verification status is required"],
+    default: false,
   },
 
   serviceHrs: { type: String },
@@ -185,11 +185,11 @@ const RiderProfileSchema = new Schema({
   },
   visibility: {
     type: Boolean,
-    required: [true, "visibility is required"],
+    default: false,
   },
   verified: {
     type: Boolean,
-    required: [true, "verification status is required"],
+    default: false,
   },
 });
 

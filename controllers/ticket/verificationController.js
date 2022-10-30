@@ -1,21 +1,21 @@
 require("dotenv").config();
 const cloudinary = require("../../services/img-upload/cloundinary");
 const Verification = require("../../models/ticket");
-const Profile = require("../../models/profile");
+const { Customer, Merchant, Rider } = require("../../models/profile");
 
 
 // POST
 async function createVerificationTicket(req, res) {
     try {
 
-        const hasPending = await Verification.findOne({ accountId: req.body.accountId});
-        if(hasPending) {
-            return res.status(400).send({ message: "Account Id has pending ticket"});
+        const hasPending = await Verification.findOne({ accountId: req.body.accountId });
+        if (hasPending) {
+            return res.status(400).send({ message: "accountId has pending ticket" });
         }
         const filePath = req.file.path;
-        const options = { 
-            folder: process.env.CLOUDINARY_FOLDER + "/tickets/verification", 
-            unique_filename: true 
+        const options = {
+            folder: process.env.CLOUDINARY_FOLDER + "/tickets/verification",
+            unique_filename: true
         };
         const uploadedImg = await cloudinary.uploader.upload(filePath, options);
 
@@ -34,16 +34,16 @@ async function createVerificationTicket(req, res) {
 async function getAllVerificationTickets(req, res) {
     try {
         const { status } = req.query;
-        if(status == "pending") {
-           return Verification.find({status})
-                .sort({ createdAt: -1 }) // filter by date
-                .select({  __v: 0 }) // Do not return _id and __v
+        if (status === "pending") {
+            return Verification.find({ status })
+                .sort({ 'date.createdAt': -1 }) // sort by date
+                .select({ __v: 0 }) // Do not return _id and __v
                 .then((value) => res.status(200).json(value))
                 .catch((err) => res.status(400).json(err));
         }
-        return Verification.find({status})
-            .sort({ createdAt: -1 }) // filter by date
-            .select({  __v: 0 }) // Do not return _id and __v
+        return Verification.find({ status })
+            .sort({ 'date.createdAt': -1 }) // sort by date
+            .select({ __v: 0 }) // Do not return _id and __v
             .then((value) => res.status(200).json(value))
             .catch((err) => res.status(400).json(err));
     } catch (error) {
@@ -65,26 +65,17 @@ async function getSingleVerificationTicket(req, res) {
 // UPDATE
 async function updateProfileVerificationStatus(req, res) {
     try {
-        const {_id, accountId, verified, status} = req.body;
-        // UPDATE PROFILE STATUS
-        Profile.findOneAndUpdate(
-            { accountId },
-            { verified })
-            .then(() => console.log({message: "Profile updated"}))
-            .catch(() => res.status(400).json({ 
-                message: "accountId doesn't exist or has already been deleted"
-            }));
-       
-        // UPDATE SUBMITTED TICKET
-        Verification.findByIdAndUpdate(_id,
-            { status }, 
-            { new: true, runValidators: true })
-            .then((value) => {
-                if (value) 
-                    return res.status(200).json({ message: "Verification updated"});
-                return res.status(400).json({ message: "_id doesn't exist or has already been deleted"});
-            })
-            .catch((err) => res.status(400).json(err));
+        const { _id, accountId, role, isVerified, ticketStatus } = req.body;
+        const options = { new: true, runValidators: true };
+
+        let profile;
+        if (role === "customer") profile = await Customer.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
+        if (role === "merchant") profile = await Merchant.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
+        if (role === "rider") profile = await Rider.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
+
+        const verification = await Verification.findByIdAndUpdate(_id, { status: ticketStatus }, options);
+
+        return res.status(200).json({ profile, verification });
     } catch (error) {
         console.error(error);
     }
@@ -96,9 +87,9 @@ async function deleteVerificationTicket(req, res) {
         const _id = req.params.id;
         Verification.findByIdAndDelete(_id)
             .then((value) => {
-                if (value) 
-                    return res.status(200).json({ message: "deleted"});
-                return res.status(200).json({ message: "_id doesn't exist or has already been deleted"});
+                if (value)
+                    return res.status(200).json({ message: "deleted" });
+                return res.status(200).json({ message: "_id doesn't exist or has already been deleted" });
             })
             .catch((err) => res.status(400).json(err));
     } catch (error) {
@@ -107,10 +98,10 @@ async function deleteVerificationTicket(req, res) {
 };
 
 
-module.exports = { 
-    createVerificationTicket, 
-    getAllVerificationTickets, 
-    getSingleVerificationTicket,  
+module.exports = {
+    createVerificationTicket,
+    getAllVerificationTickets,
+    getSingleVerificationTicket,
     updateProfileVerificationStatus,
     deleteVerificationTicket
 };

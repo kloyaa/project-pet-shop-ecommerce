@@ -27,6 +27,7 @@ try {
   app.use("/api", require("./routes/routeCart"));
   app.use("/api", require("./routes/routeStatistics"));
   app.use("/api", require("./routes/routeMonetization"));
+  app.use("/api", require("./controllers/uploadController"));
 
   app.listen(port, () => console.log(`SERVER IS NOW RUNNING ON ${port}`));
 } catch (error) {

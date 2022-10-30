@@ -19,10 +19,15 @@ const VerificationSchema = new Schema({
             type: Date,
         },
     },
+    role: {
+        type: String,
+        required: [true, "role is required"],
+        enum: ["customer", "driver", "shop"],
+    },
     status: {
         type: String,
         enum: ["pending", "verified", "rejected"],
-        required: [true, "status is required"],
+        default: "pending",
     },
 });
 
