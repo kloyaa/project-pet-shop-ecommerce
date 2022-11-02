@@ -70,8 +70,8 @@ async function updateProfileVerificationStatus(req, res) {
 
         let profile;
         if (role === "customer") profile = await Customer.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
-        if (role === "merchant") profile = await Merchant.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
-        if (role === "rider") profile = await Rider.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
+        if (role === "shop") profile = await Merchant.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
+        if (role === "driver") profile = await Rider.findOneAndUpdate({ accountId }, { verified: isVerified }, options);
 
         const verification = await Verification.findByIdAndUpdate(_id, { status: ticketStatus }, options);
 
